@@ -6,3 +6,7 @@ technical_dossier/
 
 # Ignoring POLARS.xlsx
 POLARS/*.xlsx
+
+# Ignoring raw, beta version of the IPython notebook.
+Wells_turbine_model_gitignore.ipynb
+.ipynb_checkpoints/Wells_turbine_model_gitignore-checkpoint
