@@ -3,4 +3,5 @@ numpy
 openpyxl
 pickle5
 scipy
+jupyter_contrib_nbextensions
 
