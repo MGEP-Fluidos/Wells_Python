@@ -1,2 +1,5 @@
 # Ignoring Excel files.
 *.xlsx
+
+# Ignoring techincal_dossier directory.
+technical_dossier/
