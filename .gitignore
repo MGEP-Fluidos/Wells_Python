@@ -3,3 +3,6 @@
 
 # Ignoring techincal_dossier directory.
 technical_dossier/
+
+# Ignoring POLARS.xlsx
+POLARS/*.xlsx
