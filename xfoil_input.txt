@@ -1,0 +1,19 @@
+NACA 0012
+PPAR
+N 300
+T 1
+
+
+PSAV Save_Airfoil.txt
+OPER
+VISC
+6000000
+ITER
+100
+Pacc
+POLAR_30_180_0DOT1.txt
+
+ASEQ
+30
+180
+5
