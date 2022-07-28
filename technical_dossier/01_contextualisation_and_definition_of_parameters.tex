@@ -1,0 +1,60 @@
+% !TEX root =technical_dossier.tex
+
+%% CONTEXTUALISATION AND DEFINITION OF PARAMETERS
+\section*{Contextualisation and definition of parameters}{\label{sec:contextualisation_definition_parameters}}
+\noindent The present dossier is aimed at deriving the analytical approaches employed for modeling a Wells turbine working as part of an oscillating water column (OWC) conversion system. A schematic of such a system is depicted on \Cref{subfig:sketch_a}. On its simplest conception, the OWC system works thusly: when the wave flow fills the plenum chamber, it creates an air flow that travels through the annular duct where the Wells turbine is located. Such a flow acts upon the turbine's blades, causing a mechanical motion that is transformed into an electrical output and taken to the power grid. Conversely, the emptying of the chamber during the downward motion of the wave produces an airflow in the opposite direction, entering the turbine duct from the atmospheric side. The operational principle of the Wells turbine ensures a symmetric response to such shifts in the direction of the flow, allowing to extract energy at both the upward and downward phases of the wave.\\
+It is the purpose of this document to derive the analytical models that allow predicting the aerodynamic behaviour that a Wells turbine show when facing a set of given flow conditions. As the focus is set on the turbine itself, \Cref{subfig:sketch_b} shows a zoomed sketch of it. As observed, the represented device corresponds to the simplest version of a Wells turbine, namely a monoplane rotor. On a first approximation, the modelling will be constrained to such a geometry, incorporating additional components further on. The figure serves the purpose of defining the curvilinear axes employed in the analysis, which correspond to standard cylindrical coordinates:
+\begin{itemize}
+	\item{The $x-$axis runs along the axis of the turbine, and is named the \emph{axial direction}.}
+	\item{The $r-$axis travels along the radius of the turbine and the blades, and is named the \emph{radial direction}.}
+	\item{The $\theta-$axis is circumferential, and is termed the \emph{tangential direction}.}
+\end{itemize}
+Besides the axes upon which the flow is analysed, the axial section $a-a'$ sketched in \Cref{subfig:sketch_b} is shown schematically in \Cref{subfig:sketch_c}, and serves the purpose of defining the geometrical parameters that determine the design of the turbine and, ultimately, its aerodynamic behaviour. Those parameters are:
+\begin{itemize}
+	\item{$r_{hub}$: the turbine hub's radius.}
+	\item{$r_{tip}$: the turbine tip's radius. The hub-to-tip ratio is termed $\nu=\frac{r_{hub}}{r_{tip}}$.}
+	\item{$r_{cas}$: the casing's radius, which may turn relevant for determining the gap that exists between the casing and the blades' tip.}
+	\item{$c$: the chord of the blades, which can be a function of the radial parameter, i.e.\ $c=c\left(r\right)$.}
+	\item{$t$: the distance between blades, namely the one between leading-edges or trailing-edges, which also depends on the radius, i.e.\ $t=t\left(r\right)$.}
+	\item{$\sigma$: the solidity parameter, which corresponds to the ratio of the circumferential perimeter occupied by the blades at each radial stage, i.e. $\sigma=c/t$.}
+	\item{$Z$: the number of turbine blades.}
+	\item{$\omega$: the angular velocity, which is considered constant on a first approximation.}
+	\item{$NACA00XX$: or, in other wrods, the airfoil profile, which usually corresponds to a symmetric, four-digit NACA geometry.}
+	\item{$AR$: the aspect ratio, or the relation between the chordwise and spanwise dimensions of the blade, i.e.\ $AR=c/s$, where $s=r_{tip} - r_{hub}$.}
+	\item{$t$: the tip clearance, which is usually given as a percentage of the chordwise dimension $c$.}
+	\item{$\mathcal{T}$: the pitch calculated at the blade tip.}
+\end{itemize}
+\afterpage{
+\begin{landscape}
+	\thispagestyle{empty}
+	\begin{figure}[h!]
+		\vspace{-27.5mm}
+		\hspace{-25mm}	
+		\scalebox{0.85}{\includegraphics{figures/sketch.pdf}}
+		\begin{subfigure}{\textwidth}
+			\phantomsubcaption
+			\label{subfig:sketch_a}
+		\end{subfigure}
+		\begin{subfigure}{\textwidth}
+			\phantomsubcaption
+			\label{subfig:sketch_b}
+		\end{subfigure}			
+		\begin{subfigure}{\textwidth}
+			\phantomsubcaption
+			\label{subfig:sketch_c}
+		\end{subfigure}
+		\begin{subfigure}{\textwidth}
+			\phantomsubcaption
+			\label{subfig:sketch_d}
+		\end{subfigure}		
+		\caption{schematic of an OWC system and a Wells turbine's geometrical configuration; (a): OWC conversion system; (b) isometric view of the Wells turbine and definition of motion axes; (c) axial cross section of the Wells turbine and definition of geometrical parameters; (d) blade element (BE) model approach on a radial cross-section of the Wells turbine, and definition of velocity triangles.}
+		\label{fig:sketch}
+	\end{figure}
+\end{landscape}
+}
+\noindent Apart from the geometrical parameters mentioned above, it is necessary to specify the air conditions at the inlet of the turbine, as sketched in the upper part of \Cref{subfig:sketch_d}. The pressure $p_{a1}$ will coincide with the atmospheric pressure $p_{amb.}$ in case the flow enters the turbine duct from the atmospheric side, but it will be sensibly higher if the airflow comes from the plenum chamber. The temperature $T_{a1}$ is known to vary marginally with the operation conditions so, on practical grounds, it is considered equal to $T_{amb.}$. The density $\rho_{a1}$ is calculated assuming a perfect gas model for the air:
+\begin{equation}{\label{eq:perfect_gas_model_air}}
+	\rho_{a1} = \frac{p_{a1}}{\mathcal{R}T_{a1}}\ ,
+\end{equation}
+where $\mathcal{R}$ is the specific gas constant for the air.\\
+In addition to defining the flow conditions at the inlet, \Cref{subfig:sketch_d} serves the purpose of representing a portion of a generic radial stage covering a tangential extent of two blade distances. Considering a cascade of linearly positioned blades is a typical approximation in turbomachinery applications, as it eases the analysis further. Such a configuration serves as the starting point for developing the analytical models of the Wells turbine, thus obtaining the expressions that relate the turbine outputs with the inputs. The first of such models, and the simplest one in terms of the assumptions regarding the flow, is the so-called blade element momentum (BEM) theory.

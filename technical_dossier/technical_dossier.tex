@@ -1,0 +1,37 @@
+\documentclass[9pt]{extreport}
+
+\usepackage[english]{babel}
+\usepackage{booktabs, amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{accents}
+\usepackage[utf8]{inputenc}
+\usepackage[toc,page]{appendix}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subfiles}
+\usepackage{transparent}
+\usepackage{watermark}
+\usepackage{lastpage}
+\usepackage[hyperfootnotes=False, unicode]{hyperref}
+\usepackage[nameinlink, noabbrev]{cleveref}
+\usepackage{subcaption}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{newclude}
+
+\hypersetup{colorlinks=true, linktocpage=true, pdfstartpage=1, pdfstartview=FitV}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+
+\include*{01_contextualisation_and_definition_of_parameters}
+\include*{02_two-dimensional_BEM_theory}
+\include*{03_actuator-disk_formulation}
+
+\end{document}

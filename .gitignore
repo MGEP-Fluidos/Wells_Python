@@ -4,8 +4,21 @@
 # Ignoring png files.
 *.png
 
-# Ignoring techincal_dossier directory.
-technical_dossier/
+# Ignoring pdf files.
+*.pdf
+
+# Ignoring svg files.
+*.svg
+
+# Ignoring directories.
+techincal_dossier/
+2T/
+2T_160/
+3T/
+3T_160/
+CiappiData/
+flu_v-wise/
+StarzmannData/
 
 # Ignoring POLARS.xlsx
 POLARS/*.xlsx

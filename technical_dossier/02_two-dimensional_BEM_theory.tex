@@ -1,0 +1,256 @@
+% !TEX root =technical_dossier.tex
+
+% TWO-DIMENSIONAL BEM THEORY ON A MONOPLANE ISOLATED WELLS TURBINE
+\section*{Two-dimensional BEM theory on a monoplane isolated Wells turbine}{\label{sec:two-dimensional_BEM_theory_monoplane_isolated_Wells_turbine}}
+\noindent The simplest analytical model accounting for the aerodynamic behaviour of a Wells turbine is based on the two-dimensional cascade theory. As for the flow, it is assumed that:
+\begin{itemize}
+	\item{it is steady: i.e.\ the temporal variations within the flowfield are negligible.}
+	\item{it is incompressible: which means that the Mach numbers are small enough ($\text{Ma}\leq0.3$) and, accordingly, that the flow density is constant.}
+	\item{it is irrotational: which states that the vorticity variation is negligible.}
+	\item{it is axisymmetric: allowing to reduce the turbine's analysis to the sketch in \Cref{subfig:sketch_d}, which shows the tandem-like arrangement adopted by the blades of a Wells turbine when represented as a two-dimensional linear cascade.}
+	\item{it is radially on equilibrium: which means that the momentum balance in the radial direction expresses that the pressure force equals the centripetal acceleration:
+		\begin{equation}{\label{eq:radial_equilibrium}}
+			\frac{1}{\rho_{a}}\frac{\partial{p_{a}}}{\partial{r}} = \frac{v_{\theta}^{2}}{r}\ ,
+		\end{equation}
+		with $v_{\theta}$ being the tangential component of the absolute velocity, as detailed further on. This last condition means that radial displacements (or non-zero radial components of velocity) can only occur within the cascade, with the flow stream-surfaces adopting the form of concentric cylinders elsewhere as shown in \Cref{fig:radial_equilibrium}.}
+\end{itemize}
+\begin{figure}[h!]
+	\includegraphics{figures/radial_equilibrium.pdf}
+	\caption{schematic of the radial equilibrium notion; no radial velocity components are allowed outside the rotor plane.}
+	\label{fig:radial_equilibrium}
+\end{figure}
+With those considerations in mind, the application of the BEM theory to the Wells turbine gets reduced to determining the velocity triangles shown in \Cref{subfig:sketch_d}. Conceptually, the Euler equation for turbomachines states that such devices are capable of extracting/giving an energy from/to a fluid medium by means of inducing a variation on the tangential velocity components. Thus, the working principle can be reduced, essentially, to a geometrical problem. And the torque provided by the turbine, its output power, as well as the axial pressure losses and the overall efficiency, can be obtained by linking those geometrical variations in the velocity triangles to the loads exerted upon the blades of the turbine.\\
+For such a purpose, the BEM theory assumes that no interactions are present among the different blade elements comprising a blade along its span. This allows descretising the turbine blade in a number of elements, say $N$, each covering an infinitesimal radial distance $\delta{r}=\left(r_{tip}-r_{hub}\right)/N$, and enabling the calculation of the turbine behaviour by computational means. Conceptually, such a diskretisation is shown in the two upper blades represented in \Cref{subfig:sketch_c}. The portion shown in \Cref{subfig:sketch_d} corresponds to a generic element of the diskretised configuration, which is labelled by subscripting the radial variable $r=r_{i}$ (notice that the axial direction goes downwards on the sketch, and the tangential one runs rightwards). Upon such a generic element, the following stages, velocities and angles are defined:
+\begin{itemize}
+	\item{stage (1): it is to be understood as located infinitesimally upstream the rotor plane, constituting its inlet station.}
+	\item{stage (2): located infinitesimally downstream the rotor plane, constituting its outlet station.}
+	\item{$v$: absolute velocity of the flow, as observed from an inertial frame of reference not rotating with the turbine. The upstream- and downstream-stage absolute velocities at the generic $r_{i}$ element are termed $v_{1,i}$ and $v_{2,i}$, respectively. Likewise, the axial and tangential components of such velocities are $\left(v_{x1,i}, v_{\theta1,i}\right)$ and $\left(v_{x2,i}, v_{\theta2,i}\right)$.}
+	\item{$U$: tangential velocity of the flow due to the rotary motion of the turbine. It is a radius-dependent quantity, as $U_{i}=\omega{r_{i}}$, but it does not vary between upstream and downstream stages.}
+	\item{$w$: relative velocity of the flow, as observed from a frame of reference attached to the turbine. It is the vectorial sum of the absolute and tangential velocities, namely $\overrightarrow{w}=\overrightarrow{v} + \overrightarrow{U}$. As occurs with the absolute velocity, its upstream and downstrem values at a given radial element are termed $w_{1,i}$ and $w_{2,i}$, with the axial and tangential components being $\left(w_{x1,i}, w_{\theta1,i}\right)$ and $\left(w_{x2,i}, w_{\theta2,i}\right)$, respectively.}
+	\item{$\alpha$: it is the angle between the absolute velocity and the tangential direction, with its upstream- and downstream-stage values at a given radial element being $\alpha_{1,i}$ and $\alpha_{2,i}$.}
+	\item{$\beta$: it is the angle between the relative velocity and the tangential direction, with its upstream- and downstream-stage values at a given radial element being $\beta_{1,i}$ and $\beta_{2,i}$.}
+\end{itemize}
+As the aim is to relate the velocity triangles to the forces exerted upon the blades and, ultimately, to the energy-related outputs of the turbine, the focus is put on a single blade element as shown in \Cref{fig:BEM_single_blade_with_forces}. Without loss of generality, such a sketch also assumes that the direction of the absolute flow is downwards, but the operation principle of the Wells turbine allows mirroring the velocity triangles and the aerodynamic loads around the symmetry plane.
+\begin{figure}[h!]
+	\includegraphics{figures/BEM_single_blade_with_forces.pdf}
+	\caption{BEM theory when applied to a single blade, showing the velocity triangles and the loads acting upon the profile.}
+	\label{fig:BEM_single_blade_with_forces}
+\end{figure}
+Technically, the unknown variables can be grouped into three distinct sets which, when written down according to their appearance on the solving procedure, are:
+\begin{itemize}
+	\item{the kinematic ones relative to the upstream velocity triangle.}
+	\item{the dynamic ones that pertain to the aerodynamic loads and turbine outputs, which depend on the previous and following sets.}
+	\item{and the kinematic ones relative to the downstream velocity triangle, which rely on the two precedent sets.}
+\end{itemize}
+Thus, the analytical procedure sketch herein corresponds to the so-called \emph{direct problem}, in which a set of inlet flow parameters are defined, and the aim is to obtain the energy-related outputs of the turbine.
+%%% UPSTREAM KINEMATIC RELATIONS
+\subsubsection*{Upstream kinematic relations}{\label{subsubsec:upstream_kinematic_relations}}
+Apart from the input variables required for determining the thermodynamic state of the flow (namely $\left(p_{a,i}, T_{a,i}, \rho_{a,i}\right)$), it is usual to provide the axial component of the absolute inlet velocity, i.e.\ $v_{x1,i}$, either directly or in the form of a flow-rate value or flow coefficient, which are defined next. For the simplified framework of the current approach, it is assumed that neither $v_{x1,i}$ nor $\alpha_{1,i}$ depend on the radial direction, meaning that they are the same for all the blade elements considered. Furthermore, it is assumed that the absolute velocity is essentially axial, i.e.\ $\alpha_{1,i}=\pi/2$. Under such circumstances, the prescription of the inlet velocity can be made in three different ways:
+\begin{itemize}
+	\item{directly specifying the inlet velocity: $v_{1}=v_{x1}=v_{x1,i} \ \forall \ i\in{N}$.}
+	\item{providing a flow-rate value $\dot{q}_{a1}$ and knowing, by continuity, that it is equal to the product of the velocity and the cross-sectional area of the annulus ($A_{ann}$):
+	\begin{equation}{\label{eq:cross-sectional_area_annulus}}
+		A_{ann} = \pi\left(r_{tip}^{2} - r_{hub}^{2}\right) \ ,
+	\end{equation}
+	\begin{equation}{\label{eq:velocity_from_flow-rate}}
+		v_{1}=v_{x1}=v_{x1,i} \ \forall \ i\in{N} = \frac{\dot{q}_{a1}}{A_{ann}} \ .
+	\end{equation}
+	}
+	\item{specifying the flow coefficient $\phi$ at the midspan of the blade, where $\phi$ is defined as:
+	\begin{equation}{\label{eq:phi_definition}}
+		\phi = \frac{v_{x}}{U} \ ,
+	\end{equation}
+	that is, the ratio between the axial component of the absolute velocity and the tangential velocity. If the flow coefficient is specified at midspan, i.e.\ at $i=N/2$:
+	\begin{equation}{\label{eq:velocity_from_midspan_phi}}
+		v_{1}=v_{x1}=v_{x1,i} \ \forall \ i\in{N} = \phi_{1,\frac{N}{2}}{\cdot}U_{\frac{N}{2}} = \phi_{1,\frac{N}{2}}{\cdot}\omega{r_{\frac{N}{2}}} \ .
+	\end{equation}
+	}
+\end{itemize}
+Given $v_{x1}$, determining the inlet velocity triangle is straightforward from the trigonometric relations sketched in \Cref{fig:BEM_single_blade_with_forces}:
+\begin{equation}{\label{eq:tangential_velocity}}
+	U_{i} = \omega{r_{i}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_tangential_component_of_absolute_velocity}}
+	v_{\theta1}=v_{\theta1,i} = 0 \ \forall \ i\in{N} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_absolute_velocity}}
+	v_{1,i} = \sqrt{v_{x1,i}^{2} + v_{\theta1,i}^{2}} = \sqrt{v_{x1,i}^{2}} = v_{x1,i} = v_{x1} = v_{1} \ \forall \ i\in{N} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_axial_component_of_relative_velocity}}
+	w_{x1,i} = v_{x1,i} = v_{x1} = w_{x1} \ \forall \ i\in{N} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_tangential_component_of_relative_velocity}}
+	w_{\theta1,i} = v_{\theta1,i} - U_{i} = -U_{i} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_relative_velocity}}
+	w_{1,i} = \sqrt{w_{x1,i}^{2} + w_{\theta1,i}^{2}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_beta_angle}}
+	\beta_{1,i} = \tan^{-1}\left(\frac{w_{x1,i}}{w_{\theta1,i}}\right) \ ,
+\end{equation}
+\begin{equation}{\label{eq:upstream_phi}}
+	\phi_{1,i} = \frac{v_{x1,i}}{U_{i}} \ .
+\end{equation}
+%%% AERODYNAMIC LOADS AND TURBINE OUTPUTS
+\subsubsection*{Aerodynamic loads and turbine outputs}{\label{subsubsec:aerodynamic_loads_turbine_outputs}}
+The next step of the analytical procedure is to relate the turbine outputs to the loads exerted upon the blades and the velocity triangles. As observed in \Cref{fig:BEM_single_blade_with_forces}, the action of the flow via the $w_{1}$ velocity exerts two main loads upon a single blade, namely the differential lift ($\delta{f_{l,i}}$) and drag ($\delta{f_{d,i}}$) forces. The conventional approach in aerodynamics is to employ dimensionless variables, i.e.\ lift and drag coefficients, which are defined as:
+\begin{equation}{\label{eq:cl_definition}}
+	c_{l,i} = \frac{\delta{f_{l,i}}}{\frac{1}{2}\rho_{a1}c_{i}w_{1,i}^{2}\delta{r}}=f\left(\text{NACA}_{i}, \beta_{1,i}, \text{Re}_{i}\right) \ ,
+\end{equation}
+\begin{equation}{\label{eq:cd_definition}}
+	c_{d,i} = \frac{\delta{f_{d,i}}}{\frac{1}{2}\rho_{a1}c_{i}w_{1,i}^{2}\delta{r}}=g\left(\text{NACA}_{i}, \beta_{1,i}, \text{Re}_{i}\right) \ .
+\end{equation}
+Those coefficients are to be obtained either from experimental data or from numerical simulations that may be carried out by fast-computing codes such as \emph{XFOIL}. In any case, their values depend on the chosen geometry of the airfoil (the specific NACA profile considered), the incidence angle ($\beta_{1,i}$) and the Reynolds number of the flow (Re). Such dependencies have been represented as two generic functions, $f$ and $g$, that yield the values of the coefficients after plugging in the input variables. On a generic case, the $\text{NACA}_{i}$ expression accounts for varying airfoil geometries at different radial stages but, for the purposes of the present analysis, the NACA profile is considered the same regardless of the blade element, i.e.\ $\text{NACA}_{i}=\text{NACA} \ \forall \ i\in{N}$. The $\beta_{1,i}$ angle is obtained via \Cref{eq:upstream_beta_angle}, and the Reynolds number follows from its definition:
+\begin{equation}{\label{eq:Reynolds_definition}}
+	\text{Re}_{i} = \frac{\rho_{a1}w_{1,i}c_{i}}{\mu_{a1}} \ ,
+\end{equation}
+where the $\mu_{a1}$ variable stands for the air viscosity and is an input parameter. As observed, $\text{Re}_{i}$ also depends, through $w_{1,i}$ and $c_{i}$, on the specific blade element considered; if no chord variations are present, the Reynolds is obtained after obtaining $w_{1,i}$ via \Cref{eq:upstream_axial_component_of_relative_velocity}. The experimental or numerical load coefficients are determined once the incidence angle and the relative velocity are calculated.\\
+The differential drag and lift loads are the forces that act in parallel and perpendicularly to the relative flow direction, respectively. However, the drag coefficient needs to be modified in order to account for the extra contribution coming from the leakage of the airflow through the tip clearance, which produces an induced drag component due to the increased vortex shedding and three-dimensional effects:
+\begin{equation}{\label{eq:cdtc_definition}}
+	c_{d_{tc,i}} = c_{d,i} + 0.7\frac{c_{l,i}{\cdot}t}{AR{\cdot}\mathcal{T}} \ .
+\end{equation}
+Although $\delta{f_{l,i}}$ and $\delta{f_{d,i}}$ represent the genuine loads exerted upon the blade element, the force component that produces an effective motion of the turbine is the projection of those aerodynamic loads on the tangential direction, namely $\delta{f_{\theta,i}}$. Likewise, the projection on the $x-$axis, i.e.\ $\delta{f_{x,i}}$, is the source of the pressure drop experienced by the flow when going through the turbine. Expressed mathematically:
+\begin{equation}{\label{eq:fx_definition}}
+	\delta{f_{x,i}} = \delta{f_{l,i}}\cos{\beta_{1,i}} + \delta{f_{d,i}}\sin{\beta_{1,i}}=\frac{1}{2}\rho_{a}c_{i}c_{x,i}w_{1,i}^{2}\delta{r} \ \Rightarrow
+\end{equation}
+\begin{equation}{\label{eq:cx_definition}}
+	\Rightarrow \ c_{x,i} = c_{l,i}\cos{\beta_{1,i}} + c_{d_{tc,i}}\sin{\beta_{1,i}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:ftheta_definition}}
+	\delta{f_{\theta,i}} = \delta{f_{l,i}}\sin{\beta_{1,i}} - \delta{f_{d,i}}\cos{\beta_{1,i}}=\frac{1}{2}\rho_{a}c_{i}c_{\theta,i}w_{1,i}^{2}\delta{r} \ \Rightarrow
+\end{equation}
+\begin{equation}{\label{eq:ctheta_definition}}
+	\Rightarrow \ c_{\theta,i} = c_{l,i}\sin{\beta_{1,i}} - c_{d_{tc,i}}\cos{\beta_{1,i}} \ .
+\end{equation}
+The differential torque component produced by the tangential force of a single blade is straightforward to obtain. From the formal definition of momentum, which states that the torque is the product of force and distance (to the turbine's axis):
+\begin{equation}{\label{eq:differential_torque_single_blade}}
+	\delta{\tau_{b,i}}=r_{i}\delta{f_{\theta,i}}=\frac{1}{2}\rho_{a}c_{i}c_{\theta,i}w_{1,i}^{2}r_{i}\delta{r} \ .
+\end{equation}
+The differential power $\delta{P_{b,i}}$ transferred by the flow to a single blade is given by the product of the angular velocity and the torque:
+\begin{equation}{\label{eq:differential_power_single_blade}}
+	\delta{P_{b,i}}=\omega\delta\tau_{b,i}=\frac{1}{2}\rho_{a}c_{i}c_{\theta,i}w_{1,i}^{2}\omega{r_{i}}\delta{r} \ .
+\end{equation}
+So far, \Cref{eq:differential_torque_single_blade,eq:differential_power_single_blade} determine the outputs of a single blade of the Wells turbine under the hypothesis of negligible mutual interferences. However, such inteferences can turn relevant in case of moderate values of rotor solidity, which cause both inviscid and viscous effects among blades. Wells turbines show typical solidity values between $0.4<\sigma<0.6$, which are a trade-off solution for combining efficient and self-starting operation features. There are several ways of accounting for the mentioned interferences; the one considered herein is based on a semi-empirical approach that modifies the $c_{x,i}$ and $c_{\theta,i}$ coefficients with a $\sigma-$dependent factor. The adjusted coefficients, which take into account the overall effect of the turbine blades, are defined as:
+\begin{equation}{\label{eq:cxcif_definition}}
+	c_{x_{CIF},i}=\frac{1}{1-\sigma_{i}^{2}}c_{x,i} \ ,
+\end{equation}
+\begin{equation}{\label{eq:cthetacif_definition}}
+	c_{\theta_{CIF},i}=\frac{1}{1-\sigma_{i}^{2}}c_{\theta,i} \ ,
+\end{equation}
+where the CIF subscript presumably stands for ``coefficient of interference factor''. With such considerations in mind, the overall differential torque and power at a given radial stage are given by:
+\begin{equation}{\label{eq:differential_torque}}
+	\delta\tau_{i} = \frac{1}{2}\rho_{a}c_{i}Zc_{\theta_{CIF},i}w_{1,i}^{2}r_{i}\delta{r} \ ,
+\end{equation}
+\begin{equation}{\label{eq:differential_power}}
+	\delta{P_{i}} = \frac{1}{2}\rho_{a}c_{i}Zc_{\theta_{CIF},i}w_{1,i}^{2}\omega{r_{i}}\delta{r} \ .
+\end{equation}
+That's it for the momentum balance on the tangential direction. As for the $x-$axis, the differential force at a given radial stage can be obtained by multiplying the static pressure difference with the differential area of such a stage, which is to be equated to the overall force on the axial direction:
+\begin{equation}{\label{eq:momentum_balance_x-axis}}
+\left(p_{a1,i} - p_{a2,i}\right)2\pi{r_{i}}\delta{r} = \frac{1}{2}\rho_{a}c_{i}Zc_{x_{CIF},i}w_{1,i}^{2}\delta{r} \ ,
+\end{equation}
+which, when rewritting $w_{1,i}$ as $v_{x1,i}/\sin{\beta_{1,i}}$, provides an expression for the static-to-static pressure loss:
+\begin{equation}{\label{eq:static-to-static_pressure_drop}}
+	p_{a1,i}-p_{a2,i} = \frac{\rho_{a}c_{i}Zc_{x_{CIF},i}v_{x1,i}^{2}}{4\pi{r_{i}}\sin{\beta_{1,i}}^{2}} \ .
+\end{equation}
+The total-to-static and total-to-total pressure drops can be obtained by considering that the total pressure equals the static and dynamic heads, i.e. $p_{t} = p + q$, with $p$ being the static contribution and $q=\frac{1}{2}\rho{v^{2}}$ the dynamic one. Thus:
+\begin{equation}{\label{eq:total-to-static_pressure_drop}}
+	p_{ta1,i} - p_{a2,i} = \frac{\rho_{a}c_{i}Zc_{x_{CIF},i}v_{x1,i}^{2}}{4\pi{r_{i}}\sin{\beta_{1,i}}^{2}} + \frac{1}{2}\rho_{a}v_{1,i}^{2} \ ,
+\end{equation}
+\begin{equation}{\label{eq:total-to-total_pressure_drop}}
+	p_{ta1,i} - p_{ta2,i} = \frac{\rho_{a}c_{i}Zc_{x_{CIF},i}v_{x1,i}^{2}}{4\pi{r_{i}}\sin{\beta_{1,i}}^{2}} + \frac{1}{2}\rho_{a}v_{1,i}^{2} - \frac{1}{2}\rho_{a}v_{2,i}^{2} \ .
+\end{equation}
+Notice, though, that \Cref{eq:total-to-total_pressure_drop} depends on the downstream absolute velocity $v_{2}$ unlike the other two pressure-drop expressions. The differential power input to the system, namely $\delta{P_{I,i}}$, equals the product of the total-to-total pressure drop and the differential volume flow rate:
+\begin{equation}{\label{eq:differential_power_input}}
+	\delta{P_{I,i}} = \left(p_{ta1,i} - p_{ta2,i}\right)\delta\dot{q}_{a,i}=\delta{P_{O,i}} + \delta{P_{V,i}} \ ,
+\end{equation}
+where the last equality holds considering that $\delta{P_{O,i}}$ and $\delta{P_{V,i}}$ are the differential power output and power dissipation due to viscous effects on the blades, respectively. If the kinetic energy at the outlet of the turbine is considered as a loss, its contribution can be made explicit in an expression similar to \Cref{eq:differential_power_input}, but considering the total-to-static pressure drop instead (\Cref{eq:total-to-static_pressure_drop}):
+\begin{equation}{\label{eq:total-to-static_power_input}}
+	\left(p_{ta1,i} - p_{a2,i}\right)\delta\dot{q}_{a,i} = \delta{P_{O,i}} + \delta{P_{V,i}} + \delta{P_{K,i}} \ .
+\end{equation}
+The different terms that comprise the differential power contributions read:
+\begin{equation}{\label{eq:differential_power_output}}
+	\delta{P_{O,i}} = \frac{1}{2}\rho_{a}c_{i}Zc_{\theta_{CIF},i}w_{1,i}^{2}U_{i}\delta{r} \ ,
+\end{equation}
+\begin{equation}{\label{eq:differential_viscous_power}}
+	\delta{P_{V,i}} = \frac{1}{2}\rho_{a}c_{i}Zc_{d_{tc},i}w_{1,i}^{3}\delta{r} \ ,
+\end{equation}
+\begin{equation}{\label{eq:differential_kinetic_power}}
+	\delta{P_{K,i}} = \frac{1}{2}\rho_{a}v_{2,i}^{2}\delta\dot{q}_{a,i} \ .
+\end{equation}
+If the absolute velocity imposed by the two-dimensional cascade theory is converved by hypothesis, plugging \Cref{eq:differential_power_output,eq:differential_viscous_power,eq:differential_kinetic_power} into \Cref{eq:total-to-static_pressure_drop} provides a relationship between force coefficients and velocities, namely:
+\begin{equation}
+	c_{x_{CIF},i}v_{x1,i} - c_{\theta_{CIF},i}U_{i} = c_{d_{tc},i}w_{1,i} \ .
+\end{equation}
+With all, the differential efficiency is defined as the ratio between the output and input powers:
+\begin{equation}{\label{eq:differential_efficiency}}
+	\delta\eta_{i} = \frac{\delta{P_{O,i}}}{\delta{P_{I,i}}} = \frac{\delta{P_{O,i}}}{\delta{P_{O,i}} + \delta{P_{V,i}} + \delta{P_{K,i}}} \ ,
+\end{equation}
+and the overall efficiency is obtained by integration:
+\begin{equation}{\label{eq:efficiency}}
+	\eta =  \frac{\int_{r_{hub}}^{r_{tip}}\delta{P_{O,i}}}{\int_{r_{hub}}^{r_{tip}}\delta{P_{O,i}} + \delta{P_{V,i}} + \delta{P_{K,i}}} \ .
+\end{equation}
+Lastly, the total pressure downstream of the rotor is obtained from its definition:
+\begin{equation}{\label{eq:downstream_total_pressure}}
+	p_{ta2,i} = p_{a2,i} + \frac{\rho_{a}}{2}\left(v_{x2,i}^{2} + v_{\theta2,i}^{2}\right) \ .
+\end{equation}
+Differentiating \Cref{eq:downstream_total_pressure} with respect to $r$ and combining the resultant expression with the condition of radial equilibrium given in \Cref{eq:radial_equilibrium} under the assumption of constant total pressure along the blade span:
+\begin{equation}{\label{eq:radial_equilibrium_with_total_pressure}}
+	\frac{\mathrm{d}\left(v_{x2,i}^{2}\right)}{\mathrm{d}r} = -\frac{1}{4\pi^{2}r_{i}^{2}}\frac{\mathrm{d}\left(2\pi{r_{i}}v_{\theta2,i}\right)^{2}}{\mathrm{d}r} = -\frac{1}{4\pi^{2}r_{i}^{2}}\frac{\mathrm{d}\left(\Gamma_{2,i}^{2}\right)}{\mathrm{d}r} \ ,
+\end{equation}
+where $\Gamma=2\pi{r}v_{\theta}$ is known as the circulation. Under the assumption of constant work and blade circulation around the blades, the variation in the radial direction upstream and downstream the blade row is zero. This means that the axial velocity is constant for each blade element within the two-dimensional cascade theory.
+%%% DOWNSTREAM KINEMATIC RELATIONS
+\subsubsection*{Downstream kinematic relations}{\label{subsubsec:downstream_kinematic_relations}}
+\Cref{eq:differential_kinetic_power,eq:downstream_total_pressure,eq:radial_equilibrium_with_total_pressure} already imply the knowledge of the downstream velocity triangle, but such a triangle has not been determined so far. In order to do so, it is instructive to apply the conservation of angular momentum in its integral form, i.e.\ between the upstream and downstream stages, which provides:
+\begin{equation}{\label{eq:angular_momentum_conservation}}
+	2\pi{r_{i}}\left(v_{\theta1,i}-v_{\theta2,i}\right) = \Gamma_{1,i} - \Gamma_{2,i} = \frac{Zc_{i}c_{\theta_{CIF},i}v_{x1,i}}{2\sin{\beta_{1,i}}^{2}} \ ,
+\end{equation}
+which states a principle equivalent to the Euler equation for turbomachines, meaning that \Cref{eq:angular_momentum_conservation} is expressing the fact that the working principle of a turbine is to be found in a gradient of tangential velocities, namely $\Gamma_{1,i}-\Gamma_{2,i}$. From trigonometric relations in \Cref{fig:BEM_single_blade_with_forces}, \Cref{eq:angular_momentum_conservation} can be rewritten as:
+\begin{equation}{\label{eq:angular_momentum_conservation_cotangent_relation}}
+\cot{\alpha_{2,i}} = \cot{\alpha_{1,i}} + \frac{Zc_{i}c_{\theta_{CIF},i}}{4\pi{r_{i}}\sin{\beta_{1,i}}^{2}} \ ,
+\end{equation}
+where $\cot{\alpha}=1/\tan{\alpha}$ is the cotangent of the angle $\alpha$. Thus, the downstream velocity triangle is determined by the following expressions:
+\begin{equation}{\label{eq:downstream_alpha_angle}}
+	\alpha_{2,i} = \cot^{-1}\left(\cot{\alpha_{1,i}} + \frac{Zc_{i}c_{\theta_{CIF},i}}{4\pi{r_{i}}\sin{\beta_{1,i}}^{2}}\right) \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_axial_component_of_absolute_velocity}}
+	v_{x2,i} = v_{x1,i} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_tangential_component_of_absolute_velocity}}
+	v_{\theta2,i} = v_{x2,i}\cot{\alpha_{2,i}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_absolute_velocity}}
+	v_{2,i} = \sqrt{v_{x2,i}^{2} + v_{\theta2,i}^{2}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_axial_component_of_relative_velocity}}
+	w_{x2,i} = v_{x2,i} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_tangential_component_of_relative_velocity}}
+	w_{\theta2,i} = v_{\theta2,i} - U_{i} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_relative_velocity}}
+	w_{2,i} = \sqrt{w_{x2,i}^{2} + w_{\theta2,i}^{2}} \ ,
+\end{equation}
+\begin{equation}{\label{eq:downstream_beta_angle}}
+	\beta_{1,i} = \tan^{-1}\left(\frac{w_{x2,i}}{w_{\theta2,i}}\right) \ .
+\end{equation}
+%%% ITERATIVE PROCEDURE FOR CONTINUITY ENFORCEMENT
+\subsubsection*{Iterative procedure for radial equilibrium and continuity enforcement}{\label{subsubsec:iterative_procedure_continuity_enforcement}}
+The computation of the downstream velocity triangle, determined by \Cref{eq:downstream_alpha_angle,eq:downstream_axial_component_of_absolute_velocity,eq:downstream_tangential_component_of_absolute_velocity,eq:downstream_absolute_velocity,eq:downstream_axial_component_of_relative_velocity,eq:downstream_tangential_component_of_relative_velocity,eq:downstream_relative_velocity,eq:downstream_beta_angle}, is coupled to the radial equilibrium condition expressed by \Cref{eq:radial_equilibrium_with_total_pressure}. Indeed, it is to be noted that passing from \Cref{eq:angular_momentum_conservation} to \Cref{eq:angular_momentum_conservation_cotangent_relation} implies substituting the tangential velocity components, i.e.\ $v_{\theta1,i}$ and $v_{\theta2,i}$, by the expression $v_{\theta}=v_{x}\cot{\alpha}$. When the radial equilibrium condition is not imposed, the axial velocity remains constant through the cascade of blades, meaning that $v_{x1}=v_{x2}$. This constancy of the axial velocity allows cancelling out the $v_{x}$ term at both sides of \Cref{eq:angular_momentum_conservation}, yielding the cotangent relationship expressed by \Cref{eq:angular_momentum_conservation_cotangent_relation}.\\
+But the radial equilibrium condition shows that, whenever there is a radial variation on $v_{\theta2}$, the downstream axial velocity will also change radially. This breaks the $v_{x1}=v_{x2}$ equality, which means that \Cref{eq:angular_momentum_conservation_cotangent_relation,eq:downstream_axial_component_of_absolute_velocity} do not apply. This implies two issues: first of all, it is necessary to employ \Cref{eq:angular_momentum_conservation} instead of \Cref{eq:angular_momentum_conservation_cotangent_relation}. Second of all, the enforcement of the radial condition and the variation of the outlet velocity triangle are interrelated; this leads to an iterative procedure for which a convergence or stop criterion is to be determined. Such a criterion derives from the continuity condition: the flow-rate entering the turbine must equal the flow-rate that leaves the domain. Calling $q$ to such a flow-rate, the continuity condition is expressed as:
+\begin{equation}{\label{eq:continuity_criterion}}
+	q_{1}=\int_{r_{hub}}^{r_{tip}}2\pi{r}v_{x1}\mathrm{d}r=\int_{r_{hub}}^{r_{tip}}2\pi{r}v_{x2}\left(r\right)\mathrm{d}r=q_{2} \ ,
+\end{equation}
+which is a surrogate for \Cref{eq:downstream_axial_component_of_absolute_velocity}, which merely prescribes the constancy of the axial velocity. When such a constancy does not ensue, it is necessary to impose a constancy in continuity.\\
+As such, the iterative workflow proceeds thusly:
+\begin{itemize}
+	\item{The downstream triangle is solved with $v_{x1}=v_{x2}$.}
+	\item{$v_{\theta2}\left(r\right)$ is obtained.}
+	\item{The radial-equilibrium condition is enforced: $v_{x2}\left(r\right)$ is obtained.}
+	\item{A continuity checking is performed. In case it is not fulfilled, the downstream triangle re-computed, which closes the cycle.}
+\end{itemize}
+After achieving continuity convergence, the velocity triangles that correspond to the blade elements of the considered turbine stage have been resolved under the radial equilibrium condition. The pseudocode snippet showing the iterative loop is provided in \Cref{fig:radial-equilibrium_pseudocode_snippet}.
+\begin{figure}[h!]
+	\includegraphics{figures/radial-equilibrium_pseudocode_snippet.pdf}
+	\caption{Pseudocode snippet corresponding to the enforcement of the radial-equilibrium condition.}
+	\label{fig:radial-equilibrium_pseudocode_snippet}
+\end{figure}
